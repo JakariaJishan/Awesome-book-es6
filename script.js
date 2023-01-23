@@ -1,43 +1,5 @@
-import Library from './library.js';
-
-class UiBooks {
-  constructor() {
-    this.collection = JSON.parse(localStorage.getItem('bookCollection')) || [];
-  }
-
-  addBookToLibrary(title, author, id) {
-    const book = new Library(title, author, id);
-    this.collection.push(book);
-    localStorage.setItem('bookCollection', JSON.stringify(this.collection));
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
-  }
-
-  removeBook(id) {
-    const result = this.collection.filter((item) => item.id !== id);
-    this.collection = result;
-    localStorage.setItem('bookCollection', JSON.stringify(this.collection));
-  }
-
-  displayBook() {
-    const list = document.getElementById('books');
-    list.innerHTML = '';
-    const ul = document.createElement('ul');
-    this.collection.forEach((element) => {
-      const li = document.createElement('li');
-      const button = document.createElement('button');
-      li.innerHTML = `${element.title} by ${element.author}`;
-      button.innerHTML = 'delete';
-      button.addEventListener('click', () => {
-        this.removeBook(element.id);
-        this.displayBook();
-      });
-      ul.appendChild(li);
-      li.appendChild(button);
-    });
-    list.appendChild(ul);
-  }
-}
+import { DateTime } from '../../../../../../../modules/luxon.js';
+import UiBooks from '../../../../../../../modules/uibooks.js';
 
 const bookMaker = new UiBooks();
 bookMaker.displayBook();
@@ -70,4 +32,7 @@ document.getElementById('contact').addEventListener('click', () => {
   document.getElementById('contact-page').style.display = 'block';
 });
 
-export default UiBooks;
+const date = DateTime.now();
+const humanReadable = date.toLocaleString(DateTime.DATETIME_MED);
+
+document.getElementById('time').innerHTML = humanReadable;
