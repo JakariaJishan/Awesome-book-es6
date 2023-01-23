@@ -1,5 +1,5 @@
-import { DateTime } from '../../../../../../../modules/luxon.js';
-import UiBooks from '../../../../../../../modules/uibooks.js';
+import { DateTime } from './modules/luxon.js';
+import UiBooks from './modules/uibooks.js';
 
 const bookMaker = new UiBooks();
 bookMaker.displayBook();

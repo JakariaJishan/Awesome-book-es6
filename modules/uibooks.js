@@ -1,4 +1,4 @@
-import Library from '../../../../../../../modules/library.js';
+import Library from './library.js';
 
 class UiBooks {
   constructor() {
